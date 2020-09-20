@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from .models import Stockinfo, Stock_list
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
+import urllib.request
 from django.db.models import Q
 
 # Create your views here.
@@ -55,9 +55,11 @@ def itempricerefresh(request):
 
         stock_no = key.stock_no
 
-        url = "http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code={}".format(stock_no)
-        url_request = urlopen(url)
-        result = url_request.read()
+        fullurl = "http://asp1.krx.co.kr/servlet/krx.asp.XMLSiseEng?code={}".format(stock_no)
+        # req = urllib.request.Request(fullurl, headers={'User-Agent': 'Mozilla/5.0'})
+        # result = urllib.request.urlopen(req).read()
+        req = urllib.request.Request(fullurl, headers={'User-Agent': 'Mozilla/5.0'})
+        result = urllib.request.urlopen(req).read()
         xmlsoup = BeautifulSoup(result, "lxml-xml")
 
         price = []
@@ -79,12 +81,12 @@ def itempricerefresh(request):
 def itemdetail(request, stock_id):
     stock_detail = Stockinfo.objects.get(id=stock_id)
     context = {'stockinfo': stock_detail}
-    return render(request, 'Stockitems/Itemdetail.html', context)
+    return render(request, 'Stockitems/itemdetail.html', context)
 
 def modify(request,stock_id):
     stock_modify = Stockinfo.objects.get(id=stock_id)
     context = {'stockinfo': stock_modify}
-    return render(request, 'Stockitems/itemmodify.html', context)
+    return render(request, 'Stockitems/Itemmodify.html', context)
 
 def modify_submit(request):
     find_id = request.POST['update_id']
