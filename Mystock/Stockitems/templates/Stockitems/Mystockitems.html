@@ -1,0 +1,69 @@
+
+{% extends './base.html' %}
+{% block content %}
+{% load humanize %}
+
+
+<div class="container">
+        <div class="row">
+        <div class="col-12">
+
+  <!-- Default panel contents -->
+
+    <table class="table table-sm table-hover" style="font-size:11pt">
+        <tr>
+            <th width="150">종목</th>
+            <th width="150">현재가(전일비)</th>
+            <th>메모</th>
+            <th width="80">매수출발</th>
+        </tr>
+
+        <tbody>
+        {% if not stockinfo_list %}
+        <tr>
+            <td colspan="4">종목이 없습니다.</td>
+        </tr>
+        {% else %}
+        {% for Stockinfo in stockinfo_list %}
+        <tr>
+            <td><a href="/itemdetail/{{ Stockinfo.id }}/">{{ Stockinfo.stock_name }}</a></td>
+            <td>
+                {% if Stockinfo.stock_gab > 0 %}
+                    <font color="red">{{ Stockinfo.stock_lastprice |intcomma }} (+{{ Stockinfo.stock_gab }}%)</font>
+                {% elif Stockinfo.stock_gab < 0 %}
+                    <font color="blue">{{ Stockinfo.stock_lastprice |intcomma }} ({{ Stockinfo.stock_gab }}%)</font>
+                {% else %}
+                    <font color="black">{{ Stockinfo.stock_lastprice |intcomma  }} ({{ Stockinfo.stock_gab }}%)</font>
+                {% endif %}
+            </td>
+            <td>{{ Stockinfo.stock_keypoint }}</td>
+            <td>{{ Stockinfo.stock_startprice|intcomma}}</td>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+        <tr>
+            <td colspan="4" align="right">
+                <div class="btn-group">
+
+    <a href="{% url 'Itemadd' %}" class="btn btn-sm btn-danger">종목추가</a>
+    <a href="{% url 'Itempricerefresh' %}" class="btn btn-sm btn-primary">현재가 Update</a>
+    <a href="{% url 'index' %}" class="btn btn-sm btn-success">처음화면</a>
+
+</div>
+            </td>
+
+
+        </tr>
+    </table>
+
+
+
+
+
+  </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

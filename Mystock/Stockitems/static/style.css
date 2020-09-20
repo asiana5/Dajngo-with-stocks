@@ -1,0 +1,12 @@
+textarea {
+    width:100%;
+}
+
+table {
+    border-spacing:15px;
+}
+
+input[type:submit]{
+    margin-top:10px;
+}
+

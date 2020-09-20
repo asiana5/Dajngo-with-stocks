@@ -1,0 +1,50 @@
+{% load static %}
+
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <title>Favorite stocks</title>
+
+
+
+</head>
+<body>
+<div class="container my-3">
+    <div class="row">
+        <div class="col-12">
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e6e6e6;">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Asiana5</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">관심종목 <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">차트보기</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search' %}" method="GET">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="q" value="{{ request.GET.q }}">
+      <button class="btn btn-dark" type="submit">종목/메모 검색</button>
+    </form>
+  </div>
+</nav>
+        </div>
+    </div>
+</div>
+
+
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+{% block content %}
+{% endblock %}
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+</body>
+</html>

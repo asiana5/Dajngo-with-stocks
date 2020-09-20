@@ -1,0 +1,45 @@
+{% extends './base.html' %}
+{% block content %}
+{% load humanize %}
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+
+            <font size="5">{{ stockinfo.stock_name }}</font>
+
+        {% if stockinfo.stock_gab > 0 %}
+        <font color="red">{{ stockinfo.stock_lastprice |intcomma }} (+{{ stockinfo.stock_gab }}%)</font>
+                {% elif stockinfo.stock_gab < 0 %}
+                    <font color="blue">{{ stockinfo.stock_lastprice |intcomma }} ({{ stockinfo.stock_gab }}%)</font>
+                {% else %}
+                    <font color="black">{{ stockinfo.stock_lastprice |intcomma  }} ({{ stockinfo.stock_gab }}%)</font>
+                {% endif %}
+        </div>
+        <div class="col-md-6" align="right">
+            <a href="{% url 'modify' stockinfo.id %}" class="btn btn-sm btn-danger">수정</a>
+            <a href="{% url 'Itemadd' %}" class="btn btn-sm btn-danger">종목추가</a>
+            <a href="{% url 'index' %}" class="btn btn-sm btn-success">처음화면</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <img src="https://ssl.pstatic.net/imgfinance/chart/item/area/year10/{{ stockinfo.stock_no }}.png?sidcode=1599839880137" width="700" height="289">
+
+
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+                <a href="https://finance.naver.com/item/board.nhn?code={{ stockinfo.stock_no }}" class="btn btn-sm btn-success" target="_blank">네이버종목 토론실</a>
+            <p class="card-text">{{ stockinfo.stock_memo }}</p>
+        </div>
+    </div>
+
+        </div>
+
+
+{% endblock %}

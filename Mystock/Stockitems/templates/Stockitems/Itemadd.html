@@ -1,0 +1,46 @@
+{% extends './base.html' %}
+{% block content %}
+
+<div class="container">
+
+<form action="./itemcreate/" method="POST" class="post-form my-3">{% csrf_token %}
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">종목코드</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" id="create_code" name="create_code">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">종목이름</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" id="create_name" name="create_name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">매수시작가</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" id="create_startprice" name="create_startprice">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">종목 Keypoint</label>
+    <div class="col-sm-10">
+      <input class="form-control" type="text" id="create_keypoint" name="create_keypoint">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label">종목메모</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" id="create_memo" name="create_memo" cols="90" rows="10" ></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="" class="col-sm-2 col-form-label"></label>
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-primary">저장하기</button>
+    </div>
+  </div>
+</form>
+
+</div>
+{% endblock %}
